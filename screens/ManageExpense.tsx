@@ -1,5 +1,5 @@
 import { Text } from 'react-native-paper'
 
-export function RecentExpenses() {
+export function ManageExpense() {
   return <Text>All Expenses screen</Text>
 }
