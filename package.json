@@ -11,11 +11,14 @@
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
+    "@expo/vector-icons": "^14.0.2",
     "@react-navigation/bottom-tabs": "^6.6.1",
+    "@react-navigation/elements": "^1.3.31",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.10.1",
     "@types/react": "~18.2.79",
     "expo": "^51.0.22",
+    "expo-linear-gradient": "^13.0.2",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.74.3",
