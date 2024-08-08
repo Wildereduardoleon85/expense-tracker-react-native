@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import { PaperProvider } from 'react-native-paper'
 import { theme } from './config/theme'
-import { Navigation } from './components'
+import { Navigation } from './components/Navigation'
 
 export default function App() {
   return (

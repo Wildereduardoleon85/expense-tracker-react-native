@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "title": "A book",
+    "date": "2023-02-24",
+    "price": 14.99
+  },
+  {
+    "id": "2",
+    "title": "Funko Pop",
+    "date": "2023-03-23",
+    "price": 21.22
+  },
+  {
+    "id": "3",
+    "title": "A pantry",
+    "date": "2024-02-02",
+    "price": 64.78
+  },
+  {
+    "id": "4",
+    "title": "A tv base",
+    "date": "2024-08-05",
+    "price": 11.25
+  }
+]
