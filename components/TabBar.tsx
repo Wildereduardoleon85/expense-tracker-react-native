@@ -55,11 +55,14 @@ export function TabBar({
             >
               {icon}
               <Text
-                style={{
-                  color: isFocused
-                    ? globalStyles.colors.steelBlue
-                    : globalStyles.colors.textLight,
-                }}
+                style={[
+                  styles.label,
+                  {
+                    color: isFocused
+                      ? globalStyles.colors.steelBlue
+                      : globalStyles.colors.textLight,
+                  },
+                ]}
               >
                 {label as string}
               </Text>
@@ -84,7 +87,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabContainer: {
-    // backgroundColor: 'grey',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -92,5 +94,9 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
+  },
+  label: {
+    marginTop: 4,
+    fontSize: 13,
   },
 })

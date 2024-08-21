@@ -1,4 +1,12 @@
-import { ExpensesOutput } from '../components'
+import { View } from 'react-native'
+import { ExpensesSummary } from './ExpensesSummary'
+import { ExpensesList } from './ExpensesList'
+import { Expense } from '../../types'
+
+type ExpensesOutputProps = {
+  expenses: Expense[]
+  expensesPeriod: string
+}
 
 const DUMMY_EXPENSES = [
   {
@@ -33,8 +41,14 @@ const DUMMY_EXPENSES = [
   },
 ]
 
-export function RecentExpenses() {
+export function ExpensesOutput({
+  expenses,
+  expensesPeriod,
+}: Readonly<ExpensesOutputProps>) {
   return (
-    <ExpensesOutput expenses={DUMMY_EXPENSES} expensesPeriod='Last 7 Days' />
+    <View>
+      <ExpensesSummary expenses={expenses} periodName={expensesPeriod} />
+      <ExpensesList expenses={DUMMY_EXPENSES} />
+    </View>
   )
 }

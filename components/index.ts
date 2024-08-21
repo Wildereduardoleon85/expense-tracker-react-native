@@ -1,2 +1,5 @@
 export { Header } from './Header'
 export { TabBar } from './TabBar'
+export { ExpensesOutput } from './ExpensesOutput/ExpensesOutput'
+export { ExpensesList } from './ExpensesOutput/ExpensesList'
+export { ExpensesSummary } from './ExpensesOutput/ExpensesSummary'
