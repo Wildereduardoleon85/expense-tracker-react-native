@@ -1,6 +1,5 @@
 import {
   BottomTabBarProps,
-  BottomTabHeaderProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
@@ -9,7 +8,7 @@ import { StatusBar } from 'expo-status-bar'
 import { FontAwesome } from 'expo-vector-icons'
 import { FontAwesomeIconName, Screens } from './types'
 import { AllExpenses, ManageExpense, RecentExpenses } from './screens'
-import { Header, TabBar } from './components'
+import { Header, TabBar, HeaderProps } from './components'
 
 export type RootStackParamList = {
   RecentExpenses: undefined
@@ -26,9 +25,7 @@ type TabBarIconProps = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 const BottomTabs = createBottomTabNavigator<RootStackParamList>()
-const header = (bottomTabHeaderProps: BottomTabHeaderProps) => (
-  <Header {...bottomTabHeaderProps} />
-)
+const header = (headerProps: HeaderProps) => <Header {...headerProps} />
 const tabBar = (bottomTabBarProps: BottomTabBarProps) => (
   <TabBar {...bottomTabBarProps} />
 )
@@ -87,6 +84,11 @@ export default function App() {
           <Stack.Screen
             name={Screens.ManageExpense}
             component={ManageExpense}
+            options={{
+              header,
+              headerBackVisible: true,
+              title: 'Manage Expenses',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

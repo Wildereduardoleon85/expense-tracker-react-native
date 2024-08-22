@@ -5,6 +5,7 @@ export const globalStyles = {
     blueishPurple: '#6b47f7',
     redishPurple: '#a03eff',
     textLight: '#a4a4ab',
+    ripple: '#ccc',
   },
   borderRadius: 14,
   shadowStyles: {

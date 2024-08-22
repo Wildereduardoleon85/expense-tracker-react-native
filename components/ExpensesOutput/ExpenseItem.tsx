@@ -1,4 +1,5 @@
 import {
+  Platform,
   Pressable,
   StyleProp,
   StyleSheet,
@@ -6,7 +7,12 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
-import { Expense } from '../../types'
+import {
+  NavigationProp,
+  ParamListBase,
+  useNavigation,
+} from '@react-navigation/native'
+import { Expense, Screens } from '../../types'
 import { globalStyles } from '../../config/constants'
 import { formatDate } from '../../utils'
 
@@ -16,33 +22,53 @@ type ExpenseItemProps = {
 }
 
 export function ExpenseItem({ expense, style }: Readonly<ExpenseItemProps>) {
+  const { navigate } = useNavigation<NavigationProp<ParamListBase>>()
+
+  const onExpensePressHandler = () => {
+    navigate(Screens.ManageExpense)
+  }
+
   return (
-    <Pressable>
-      <View style={[style, styles.container]}>
-        <View>
-          <Text style={styles.description}>{expense.description}</Text>
-          <Text style={styles.date}>{formatDate(expense.date)}</Text>
+    <View style={[style, styles.container]}>
+      <Pressable
+        android_ripple={{ color: globalStyles.colors.ripple }}
+        onPress={onExpensePressHandler}
+        style={({ pressed }) =>
+          pressed && Platform.OS !== 'android' ? styles.pressed : null
+        }
+      >
+        <View style={styles.innerContainer}>
+          <View>
+            <Text style={styles.description}>{expense.description}</Text>
+            <Text style={styles.date}>{formatDate(expense.date)}</Text>
+          </View>
+          <View>
+            <Text style={styles.amount}>${expense.amount.toFixed(2)}</Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.amount}>${expense.amount.toFixed(2)}</Text>
-        </View>
-      </View>
-    </Pressable>
+      </Pressable>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
     backgroundColor: 'white',
     borderRadius: globalStyles.borderRadius,
     width: '90%',
     marginHorizontal: 'auto',
     marginTop: 12,
+    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     ...globalStyles.shadowStyles,
+  },
+  innerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+  },
+  pressed: {
+    opacity: 0.5,
   },
   description: {
     fontWeight: 'bold',
