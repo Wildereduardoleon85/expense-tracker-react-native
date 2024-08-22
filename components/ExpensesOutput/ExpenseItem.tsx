@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import { Expense } from '../../types'
 import { globalStyles } from '../../config/constants'
+import { formatDate } from '../../utils'
 
 type ExpenseItemProps = {
   expense: Expense
@@ -20,10 +21,10 @@ export function ExpenseItem({ expense, style }: Readonly<ExpenseItemProps>) {
       <View style={[style, styles.container]}>
         <View>
           <Text style={styles.description}>{expense.description}</Text>
-          <Text style={styles.date}>{expense.date.toDateString()}</Text>
+          <Text style={styles.date}>{formatDate(expense.date)}</Text>
         </View>
         <View>
-          <Text style={styles.amount}>${expense.amount}</Text>
+          <Text style={styles.amount}>${expense.amount.toFixed(2)}</Text>
         </View>
       </View>
     </Pressable>
