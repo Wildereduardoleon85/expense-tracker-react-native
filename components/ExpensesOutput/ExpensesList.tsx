@@ -1,23 +1,23 @@
-import { FlatList, Text } from 'react-native'
+import { FlatList } from 'react-native'
 import { Expense } from '../../types'
+import { ExpenseItem } from '..'
 
 type ExpensesListProps = {
   expenses: Expense[]
-}
-
-type ExpenseItemProps = {
-  expense: Expense
-}
-
-function ExpenseItem({ expense }: Readonly<ExpenseItemProps>) {
-  return <Text>{expense.description}</Text>
 }
 
 export function ExpensesList({ expenses }: Readonly<ExpensesListProps>) {
   return (
     <FlatList
       data={expenses}
-      renderItem={({ item }) => <ExpenseItem expense={item} />}
+      renderItem={({ item, index }) => (
+        <ExpenseItem
+          style={{
+            marginBottom: index === expenses.length - 1 ? 28 : 0,
+          }}
+          expense={item}
+        />
+      )}
       keyExtractor={(item) => item.id}
     />
   )
