@@ -9,6 +9,7 @@ import { FontAwesome } from 'expo-vector-icons'
 import { FontAwesomeIconName, Screens } from './types'
 import { AllExpenses, ManageExpense, RecentExpenses } from './screens'
 import { Header, TabBar, HeaderProps } from './components'
+import ExpensesProvider from './context/ExpenseProvider'
 
 export type RootStackParamList = {
   RecentExpenses: undefined
@@ -74,23 +75,25 @@ export default function App() {
   return (
     <>
       <StatusBar style='light' />
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name={Screens.ExpensesOverview}
-            component={ExpensesOverview}
-          />
-          <Stack.Screen
-            name={Screens.ManageExpense}
-            component={ManageExpense}
-            options={{
-              header,
-              headerBackVisible: true,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ExpensesProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name={Screens.ExpensesOverview}
+              component={ExpensesOverview}
+            />
+            <Stack.Screen
+              name={Screens.ManageExpense}
+              component={ManageExpense}
+              options={{
+                header,
+                headerBackVisible: true,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ExpensesProvider>
     </>
   )
 }

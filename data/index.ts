@@ -23,10 +23,4 @@ export default [
     amount: 14.99,
     date: new Date(2022, 1, 19, 15, 2),
   },
-  {
-    id: 'e5',
-    description: 'Another book',
-    amount: 18.59,
-    date: new Date(2022, 1, 18, 16, 45),
-  },
 ]

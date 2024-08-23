@@ -15,3 +15,5 @@ export type Expense = {
   amount: number
   date: Date
 }
+
+export type ExpensesState = Expense[]
