@@ -7,8 +7,8 @@ import {
   ViewStyle,
 } from 'react-native'
 import { FontAwesome } from 'expo-vector-icons'
-import { globalStyles } from '../config/constants'
-import { FontAwesomeIconName } from '../types'
+import { globalStyles } from '../../config/constants'
+import { FontAwesomeIconName } from '../../types'
 
 type IconButtonProps = {
   /**
@@ -42,6 +42,10 @@ type IconButtonProps = {
    * Determines if the shadow of the element is shown, default value is true
    */
   enableSahdow?: boolean
+  /**
+   * Use this to set the backgroundColor of the button
+   */
+  color?: string
 }
 
 export function IconButton({
@@ -51,19 +55,12 @@ export function IconButton({
   rootStyles,
   onPress,
   enableSahdow = true,
+  color = globalStyles.colors.steelBlue,
 }: Readonly<IconButtonProps>) {
   const buttonSize = {
     width: size,
     height: size,
     borderRadius: size / 2,
-  }
-
-  const shadowStyles = {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 5, // For Android shadow
   }
 
   return (
@@ -74,7 +71,11 @@ export function IconButton({
       >
         <View
           style={[
-            { ...buttonSize, ...(enableSahdow && shadowStyles) },
+            {
+              ...buttonSize,
+              ...(enableSahdow && globalStyles.darkerShadowStyles),
+              backgroundColor: color,
+            },
             styles.button,
             buttonStyles,
           ]}
@@ -92,7 +93,6 @@ export function IconButton({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: globalStyles.colors.steelBlue,
     justifyContent: 'center',
     alignItems: 'center',
   },

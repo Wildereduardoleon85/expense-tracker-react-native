@@ -4,7 +4,7 @@ import { NativeStackNavigationOptions } from '@react-navigation/native-stack'
 import { NavigationProp, ParamListBase } from '@react-navigation/native'
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs'
 import { globalStyles } from '../config/constants'
-import { IconButton } from './IconButton'
+import { IconButton } from '.'
 
 export type HeaderProps = {
   options: NativeStackNavigationOptions | BottomTabNavigationOptions

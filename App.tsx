@@ -14,7 +14,7 @@ export type RootStackParamList = {
   RecentExpenses: undefined
   AllExpenses: undefined
   ExpensesOverview: undefined
-  ManageExpense: undefined
+  ManageExpense: { expenseId: string }
 }
 
 type TabBarIconProps = {
@@ -87,7 +87,6 @@ export default function App() {
             options={{
               header,
               headerBackVisible: true,
-              title: 'Manage Expenses',
             }}
           />
         </Stack.Navigator>

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     width: '90%',
     marginHorizontal: 'auto',
     marginTop: 24,
-    ...globalStyles.shadowStyles,
+    ...globalStyles.lightShadowStyles,
   },
   period: {
     color: 'white',

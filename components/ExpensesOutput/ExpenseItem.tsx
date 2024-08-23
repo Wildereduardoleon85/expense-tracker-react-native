@@ -25,7 +25,7 @@ export function ExpenseItem({ expense, style }: Readonly<ExpenseItemProps>) {
   const { navigate } = useNavigation<NavigationProp<ParamListBase>>()
 
   const onExpensePressHandler = () => {
-    navigate(Screens.ManageExpense)
+    navigate(Screens.ManageExpense, { expenseId: expense.id })
   }
 
   return (
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 'auto',
     marginTop: 12,
     overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
-    ...globalStyles.shadowStyles,
+    ...globalStyles.lightShadowStyles,
   },
   innerContainer: {
     flexDirection: 'row',
