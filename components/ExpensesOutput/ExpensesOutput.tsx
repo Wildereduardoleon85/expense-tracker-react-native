@@ -1,8 +1,7 @@
-import { useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { ExpensesSummary, ExpensesList } from '..'
 import { Expense } from '../../types'
-import ExpensesContext from '../../context/ExpensesContext'
+import { ExpensesSummary } from './ExpensesSummary'
+import { ExpensesList } from './ExpensesList'
 
 type ExpensesOutputProps = {
   expenses: Expense[]
@@ -13,12 +12,10 @@ export function ExpensesOutput({
   expenses,
   expensesPeriod,
 }: Readonly<ExpensesOutputProps>) {
-  const { state: DUMMY_EXPENSES } = useContext(ExpensesContext)
-
   return (
     <View style={styles.container}>
       <ExpensesSummary expenses={expenses} periodName={expensesPeriod} />
-      <ExpensesList expenses={DUMMY_EXPENSES} />
+      <ExpensesList expenses={expenses} />
     </View>
   )
 }

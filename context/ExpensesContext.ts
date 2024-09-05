@@ -5,7 +5,10 @@ type ExpensesContextProps = {
   state: ExpensesState
   addExpense: (expense: Omit<Expense, 'id'>) => void
   deleteExpense: (id: string) => void
-  updateExpense: (id: string, expense: Expense) => void
+  updateExpense: (
+    id: string,
+    updatedExpense: { description?: string; amount?: number; date?: Date },
+  ) => void
 }
 
 const ExpensesContext = createContext({} as ExpensesContextProps)

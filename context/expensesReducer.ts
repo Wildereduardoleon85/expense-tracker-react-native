@@ -4,7 +4,13 @@ import { generateUniqueId } from '../utils'
 type ExpensesAction =
   | { type: 'addExpense'; payload: Omit<Expense, 'id'> }
   | { type: 'deleteExpense'; payload: string }
-  | { type: 'updateExpense'; payload: { id: string; expense: Expense } }
+  | {
+      type: 'updateExpense'
+      payload: {
+        id: string
+        updatedExpense: { description?: string; amount?: number; date?: Date }
+      }
+    }
 
 function productReducer(
   state: ExpensesState,
@@ -18,7 +24,7 @@ function productReducer(
       return state.filter((expense) => expense.id !== action.payload)
 
     case 'updateExpense': {
-      const { description, amount, date } = action.payload.expense
+      const { description, amount, date } = action.payload.updatedExpense
       const updatedExpenses = state.map((expense) => {
         if (expense.id === action.payload.id) {
           return {

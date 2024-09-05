@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useContext, useLayoutEffect } from 'react'
 import {
   NavigationProp,
   ParamListBase,
@@ -7,8 +7,9 @@ import {
 import { StyleSheet, View } from 'react-native'
 import { Screens } from '../types'
 import { RootStackParamList } from '../App'
-import { Button, IconButton } from '../components'
 import { globalStyles } from '../config/constants'
+import { Button, IconButton } from '../components'
+import ExpensesContext from '../context/ExpensesContext'
 
 type ManageExpenseProps = {
   route: RouteProp<RootStackParamList, Screens.ManageExpense>
@@ -19,6 +20,8 @@ export function ManageExpense({
   route,
   navigation,
 }: Readonly<ManageExpenseProps>) {
+  const { deleteExpense, addExpense, updateExpense } =
+    useContext(ExpensesContext)
   const expenseId = route.params?.expenseId
   const isEditScreen = !!expenseId
 
@@ -32,11 +35,21 @@ export function ManageExpense({
     navigation.goBack()
   }
 
-  const onConfirm = () => {
+  const onConfirmHandler = () => {
+    if (isEditScreen) {
+      updateExpense(expenseId, { description: 'A star wars book' })
+    } else {
+      addExpense({
+        amount: 19.99,
+        date: new Date(2024, 6, 20, 20, 30),
+        description: 'Test',
+      })
+    }
     navigation.goBack()
   }
 
   const onDeleteHandler = () => {
+    deleteExpense(expenseId)
     navigation.goBack()
   }
 
@@ -50,7 +63,7 @@ export function ManageExpense({
         >
           Cancel
         </Button>
-        <Button onPress={onConfirm} rootStyles={styles.button}>
+        <Button onPress={onConfirmHandler} rootStyles={styles.button}>
           {isEditScreen ? 'Update' : 'Add'}
         </Button>
       </View>

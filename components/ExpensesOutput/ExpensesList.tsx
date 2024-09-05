@@ -1,6 +1,6 @@
 import { FlatList } from 'react-native'
 import { Expense } from '../../types'
-import { ExpenseItem } from '..'
+import { ExpenseItem } from './ExpenseItem'
 
 type ExpensesListProps = {
   expenses: Expense[]

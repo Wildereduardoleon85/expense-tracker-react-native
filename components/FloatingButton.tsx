@@ -4,8 +4,8 @@ import {
   ParamListBase,
   useNavigation,
 } from '@react-navigation/native'
-import { IconButton } from '.'
 import { Screens } from '../types'
+import { IconButton } from './UI'
 
 export function FloatingButton() {
   const { navigate } = useNavigation<NavigationProp<ParamListBase>>()

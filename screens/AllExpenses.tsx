@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { ExpensesOutput, FloatingButton } from '../components'
 import ExpensesContext from '../context/ExpensesContext'
+import { FloatingButton, ExpensesOutput } from '../components'
 
 export function AllExpenses() {
   const { state: DUMMY_EXPENSES } = useContext(ExpensesContext)

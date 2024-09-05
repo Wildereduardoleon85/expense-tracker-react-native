@@ -1,3 +1,3 @@
-export { AllExpenses } from './AllExpenses'
-export { ManageExpense } from './ManageExpense'
-export { RecentExpenses } from './RecentExpenses'
+export * from './AllExpenses'
+export * from './ManageExpense'
+export * from './RecentExpenses'

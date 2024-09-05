@@ -25,12 +25,15 @@ function ExpensesProvider({ children }: Readonly<ExpensesProviderProps>) {
     })
   }
 
-  function updateExpense(id: string, expense: Expense) {
+  function updateExpense(
+    id: string,
+    updatedExpense: { description?: string; amount?: number; date?: Date },
+  ) {
     dispatch({
       type: 'updateExpense',
       payload: {
         id,
-        expense,
+        updatedExpense,
       },
     })
   }
