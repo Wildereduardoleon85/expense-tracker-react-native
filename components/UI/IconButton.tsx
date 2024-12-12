@@ -20,28 +20,34 @@ type IconButtonProps = {
     size?: number
     color?: string
   }
+
   /**
    * The size of the etire button. Default value is 50
    */
   size?: number
+
   /**
    * Styles applied to the button itself, for example: backgroundColor,
    * borderRadius, etc.
    */
   buttonStyles?: StyleProp<ViewStyle>
+
   /**
    * Styles applied to the root container, use this for positioning, margin,
    * etc.
    */
   rootStyles?: StyleProp<ViewStyle>
+
   /**
    * Event triggered when button is pressed
    */
   onPress?: (event: GestureResponderEvent) => void
+
   /**
    * Determines if the shadow of the element is shown, default value is true
    */
   enableSahdow?: boolean
+
   /**
    * Use this to set the backgroundColor of the button
    */
@@ -64,7 +70,13 @@ export function IconButton({
   }
 
   return (
-    <View style={rootStyles}>
+    <View
+      style={[
+        enableSahdow && globalStyles.darkerShadowStyles,
+        buttonSize,
+        rootStyles,
+      ]}
+    >
       <Pressable
         onPress={onPress}
         style={({ pressed }) => pressed && styles.pressed}
@@ -73,7 +85,6 @@ export function IconButton({
           style={[
             {
               ...buttonSize,
-              ...(enableSahdow && globalStyles.darkerShadowStyles),
               backgroundColor: color,
             },
             styles.button,

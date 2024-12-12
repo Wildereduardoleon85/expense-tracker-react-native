@@ -17,3 +17,19 @@ export type Expense = {
 }
 
 export type ExpensesState = Expense[]
+
+export type InputNames = 'amount' | 'date' | 'description'
+
+export type InputType = {
+  hasBeenTouched: boolean
+  value: string
+  error: string
+}
+
+export type InputValues = {
+  [key in InputNames]: InputType
+}
+
+export type ExpenseformInitialValues = {
+  [key in InputNames]: string
+}

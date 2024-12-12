@@ -4,8 +4,11 @@ export const globalStyles = {
     coral: '#ff6581',
     blueishPurple: '#6b47f7',
     redishPurple: '#a03eff',
-    textLight: '#a4a4ab',
+    lightGrey: '#a4a4ab',
+    darkGrey: '#727277',
     ripple: '#ccc',
+    error: '#cc5067',
+    veryLightGrey: '#dadadd',
   },
   borderRadius: 14,
   lightShadowStyles: {

@@ -38,7 +38,7 @@ export function TabBar({
               focused: isFocused,
               color: isFocused
                 ? globalStyles.colors.steelBlue
-                : globalStyles.colors.textLight,
+                : globalStyles.colors.lightGrey,
               size: 18,
             })
           : null
@@ -60,7 +60,7 @@ export function TabBar({
                   {
                     color: isFocused
                       ? globalStyles.colors.steelBlue
-                      : globalStyles.colors.textLight,
+                      : globalStyles.colors.lightGrey,
                   },
                 ]}
               >

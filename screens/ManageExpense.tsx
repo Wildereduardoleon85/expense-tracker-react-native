@@ -8,8 +8,9 @@ import { StyleSheet, View } from 'react-native'
 import { Screens } from '../types'
 import { RootStackParamList } from '../App'
 import { globalStyles } from '../config/constants'
-import { Button, IconButton } from '../components'
+import { IconButton } from '../components'
 import ExpensesContext from '../context/ExpensesContext'
+import { ExpenseForm } from '../components/ManageExpense'
 
 type ManageExpenseProps = {
   route: RouteProp<RootStackParamList, Screens.ManageExpense>
@@ -20,8 +21,7 @@ export function ManageExpense({
   route,
   navigation,
 }: Readonly<ManageExpenseProps>) {
-  const { deleteExpense, addExpense, updateExpense } =
-    useContext(ExpensesContext)
+  const { deleteExpense } = useContext(ExpensesContext)
   const expenseId = route.params?.expenseId
   const isEditScreen = !!expenseId
 
@@ -31,47 +31,23 @@ export function ManageExpense({
     })
   }, [navigation, isEditScreen])
 
-  const onCancelPressHandler = () => {
+  const handleCancel = () => {
     navigation.goBack()
   }
 
-  const onConfirmHandler = () => {
-    if (isEditScreen) {
-      updateExpense(expenseId, { description: 'A star wars book' })
-    } else {
-      addExpense({
-        amount: 19.99,
-        date: new Date(2024, 6, 20, 20, 30),
-        description: 'Test',
-      })
-    }
-    navigation.goBack()
-  }
-
-  const onDeleteHandler = () => {
+  const handleDelete = () => {
     deleteExpense(expenseId)
     navigation.goBack()
   }
 
   return (
     <View>
-      <View style={styles.buttonsContainer}>
-        <Button
-          onPress={onCancelPressHandler}
-          rootStyles={styles.button}
-          color={globalStyles.colors.coral}
-        >
-          Cancel
-        </Button>
-        <Button onPress={onConfirmHandler} rootStyles={styles.button}>
-          {isEditScreen ? 'Update' : 'Add'}
-        </Button>
-      </View>
+      <ExpenseForm onCancel={handleCancel} />
       {isEditScreen && (
         <>
           <View style={styles.divider} />
           <IconButton
-            onPress={onDeleteHandler}
+            onPress={handleDelete}
             rootStyles={styles.icon}
             color={globalStyles.colors.coral}
             icon={{ name: 'trash' }}
@@ -83,22 +59,12 @@ export function ManageExpense({
 }
 
 const styles = StyleSheet.create({
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '90%',
-    marginHorizontal: 'auto',
-    marginTop: 24,
-  },
   divider: {
     borderBottomWidth: 1.5,
-    borderBottomColor: globalStyles.colors.textLight,
+    borderBottomColor: globalStyles.colors.lightGrey,
     width: '90%',
     marginTop: 12,
     marginHorizontal: 'auto',
-  },
-  button: {
-    width: '48%',
   },
   icon: {
     marginHorizontal: 'auto',

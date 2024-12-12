@@ -3,19 +3,19 @@ export default [
     id: 'e1',
     description: 'A pair of shoes',
     amount: 59.99,
-    date: new Date(2024, 7, 25, 8, 32),
+    date: new Date(2024, 9, 15, 8, 32),
   },
   {
     id: 'e2',
     description: 'A pair of trousers',
     amount: 89.29,
-    date: new Date(2024, 7, 22, 17, 20),
+    date: new Date(2024, 9, 12, 17, 20),
   },
   {
     id: 'e3',
     description: 'Some bananas',
     amount: 5.99,
-    date: new Date(2024, 11, 1, 18, 31),
+    date: new Date(2024, 9, 1, 18, 31),
   },
   {
     id: 'e4',

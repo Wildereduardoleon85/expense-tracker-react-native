@@ -26,7 +26,7 @@ export function FloatingButton() {
 const styles = StyleSheet.create({
   root: {
     position: 'absolute',
-    bottom: 18,
+    bottom: 50,
     right: 18,
   },
 })

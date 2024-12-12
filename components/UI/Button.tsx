@@ -19,6 +19,7 @@ type ButtonProps = {
   textStyles?: StyleProp<TextStyle>
   enableShadow?: boolean
   color?: string
+  disabled?: boolean
 }
 
 export function Button({
@@ -29,12 +30,15 @@ export function Button({
   textStyles,
   enableShadow = true,
   color = globalStyles.colors.steelBlue,
+  disabled = false,
 }: Readonly<ButtonProps>) {
   return (
     <View
       style={[
         styles.root,
-        { backgroundColor: color },
+        {
+          backgroundColor: disabled ? globalStyles.colors.veryLightGrey : color,
+        },
         { ...(enableShadow && globalStyles.darkerShadowStyles) },
         rootStyles,
       ]}
@@ -45,10 +49,19 @@ export function Button({
         }
         onPress={onPress}
         android_ripple={{ color: globalStyles.colors.ripple }}
+        disabled={disabled}
       >
         <View style={[styles.innerContainer, innerContainerStyles]}>
           {typeof children === 'string' ? (
-            <Text style={[styles.text, textStyles]}>{children}</Text>
+            <Text
+              style={[
+                styles.text,
+                { color: disabled ? globalStyles.colors.lightGrey : 'white' },
+                textStyles,
+              ]}
+            >
+              {children}
+            </Text>
           ) : (
             children
           )}
@@ -73,7 +86,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
   },
   text: {
-    color: 'white',
     fontSize: 16,
   },
 })

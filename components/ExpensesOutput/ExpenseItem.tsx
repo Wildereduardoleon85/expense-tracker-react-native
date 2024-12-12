@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   date: {
-    color: globalStyles.colors.textLight,
+    color: globalStyles.colors.lightGrey,
     fontWeight: 'bold',
     marginTop: 4,
   },
