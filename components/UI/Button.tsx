@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   GestureResponderEvent,
   Platform,
   Pressable,
@@ -11,15 +12,45 @@ import {
 } from 'react-native'
 import { globalStyles } from '../../config/constants'
 
-type ButtonProps = {
+type ButtonContentProps = {
+  isLoading?: boolean
   children: React.ReactNode
+  disabled?: boolean
+  textStyles?: StyleProp<TextStyle>
+}
+interface ButtonProps extends ButtonContentProps {
   onPress?: (event: GestureResponderEvent) => void
   rootStyles?: StyleProp<ViewStyle>
   innerContainerStyles?: StyleProp<ViewStyle>
-  textStyles?: StyleProp<TextStyle>
   enableShadow?: boolean
   color?: string
-  disabled?: boolean
+}
+
+function ButtonContent({
+  isLoading,
+  children,
+  disabled,
+  textStyles,
+}: Readonly<ButtonContentProps>) {
+  if (isLoading) {
+    return (
+      <ActivityIndicator size='small' color={globalStyles.colors.steelBlue} />
+    )
+  }
+
+  return typeof children === 'string' ? (
+    <Text
+      style={[
+        styles.text,
+        { color: disabled ? globalStyles.colors.lightGrey : 'white' },
+        textStyles,
+      ]}
+    >
+      {children}
+    </Text>
+  ) : (
+    children
+  )
 }
 
 export function Button({
@@ -31,6 +62,7 @@ export function Button({
   enableShadow = true,
   color = globalStyles.colors.steelBlue,
   disabled = false,
+  isLoading = false,
 }: Readonly<ButtonProps>) {
   return (
     <View
@@ -52,19 +84,13 @@ export function Button({
         disabled={disabled}
       >
         <View style={[styles.innerContainer, innerContainerStyles]}>
-          {typeof children === 'string' ? (
-            <Text
-              style={[
-                styles.text,
-                { color: disabled ? globalStyles.colors.lightGrey : 'white' },
-                textStyles,
-              ]}
-            >
-              {children}
-            </Text>
-          ) : (
-            children
-          )}
+          <ButtonContent
+            disabled={disabled}
+            isLoading={isLoading}
+            textStyles={textStyles}
+          >
+            {children}
+          </ButtonContent>
         </View>
       </Pressable>
     </View>

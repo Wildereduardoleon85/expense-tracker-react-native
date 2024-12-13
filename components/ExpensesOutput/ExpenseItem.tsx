@@ -25,7 +25,7 @@ export function ExpenseItem({ expense, style }: Readonly<ExpenseItemProps>) {
   const { navigate } = useNavigation<NavigationProp<ParamListBase>>()
 
   const onExpensePressHandler = () => {
-    navigate(Screens.ManageExpense, { expenseId: expense.id })
+    navigate(Screens.EditExpense, { expenseId: expense.id })
   }
 
   return (

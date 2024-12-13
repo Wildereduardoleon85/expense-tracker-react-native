@@ -1,3 +1,3 @@
-export * from './AllExpenses'
-export * from './ManageExpense'
-export * from './RecentExpenses'
+export * from './Expenses'
+export * from './AddExpense'
+export * from './EditExpense'

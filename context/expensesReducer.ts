@@ -1,44 +1,17 @@
-import { Expense, ExpensesState } from '../types'
-import { generateUniqueId } from '../utils'
+import { ExpensesState } from '../types'
 
-type ExpensesAction =
-  | { type: 'addExpense'; payload: Omit<Expense, 'id'> }
-  | { type: 'deleteExpense'; payload: string }
-  | {
-      type: 'updateExpense'
-      payload: {
-        id: string
-        updatedExpense: { description?: string; amount?: number; date?: Date }
-      }
-    }
+type ExpensesAction = { type: 'setRefreshExpenses' }
 
 function productReducer(
   state: ExpensesState,
   action: ExpensesAction,
 ): ExpensesState {
   switch (action.type) {
-    case 'addExpense':
-      return [...state, { id: generateUniqueId(), ...action.payload }]
-
-    case 'deleteExpense':
-      return state.filter((expense) => expense.id !== action.payload)
-
-    case 'updateExpense': {
-      const { description, amount, date } = action.payload.updatedExpense
-      const updatedExpenses = state.map((expense) => {
-        if (expense.id === action.payload.id) {
-          return {
-            id: expense.id,
-            description: description ?? expense.description,
-            amount: amount ?? expense.amount,
-            date: date ?? expense.date,
-          }
-        }
-        return expense
-      })
-
-      return updatedExpenses
-    }
+    case 'setRefreshExpenses':
+      return {
+        ...state,
+        refreshExpenses: !state.refreshExpenses,
+      }
 
     default:
       return state

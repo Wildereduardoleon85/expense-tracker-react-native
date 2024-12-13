@@ -11,7 +11,7 @@ export function FloatingButton() {
   const { navigate } = useNavigation<NavigationProp<ParamListBase>>()
 
   const onAddExpensePressHandler = () => {
-    navigate(Screens.ManageExpense)
+    navigate(Screens.AddExpense)
   }
 
   return (

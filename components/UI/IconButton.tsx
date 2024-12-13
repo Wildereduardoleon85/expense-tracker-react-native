@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   GestureResponderEvent,
   Pressable,
   StyleProp,
@@ -52,6 +53,16 @@ type IconButtonProps = {
    * Use this to set the backgroundColor of the button
    */
   color?: string
+
+  /**
+   * If true, the button is disabled
+   */
+  disabled?: boolean
+
+  /**
+   * If true renders a spinner as child else, renders the children element
+   */
+  isLoading?: boolean
 }
 
 export function IconButton({
@@ -62,6 +73,8 @@ export function IconButton({
   onPress,
   enableSahdow = true,
   color = globalStyles.colors.steelBlue,
+  disabled = false,
+  isLoading = false,
 }: Readonly<IconButtonProps>) {
   const buttonSize = {
     width: size,
@@ -79,23 +92,30 @@ export function IconButton({
     >
       <Pressable
         onPress={onPress}
+        disabled={disabled}
         style={({ pressed }) => pressed && styles.pressed}
       >
         <View
           style={[
             {
               ...buttonSize,
-              backgroundColor: color,
+              backgroundColor: disabled
+                ? globalStyles.colors.veryLightGrey
+                : color,
             },
             styles.button,
             buttonStyles,
           ]}
         >
-          <FontAwesome
-            name={icon.name}
-            size={icon.size ?? 24}
-            color={icon.color ?? 'white'}
-          />
+          {isLoading ? (
+            <ActivityIndicator size='small' />
+          ) : (
+            <FontAwesome
+              name={icon.name}
+              size={icon.size ?? 24}
+              color={icon.color ?? 'white'}
+            />
+          )}
         </View>
       </Pressable>
     </View>

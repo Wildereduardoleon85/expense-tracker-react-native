@@ -1,16 +1,18 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { globalStyles } from '../../config/constants'
 import { Button, Input } from '../UI'
 import { RootStackParamList } from '../../App'
 import { useExpenseformInputs } from '../../hooks'
-import { ExpenseformInitialValues, InputType } from '../../types'
+import { Expense, ExpenseformInitialValues, InputType } from '../../types'
 import { capitalize } from '../../utils'
-import ExpensesContext from '../../context/ExpensesContext'
 
 type ExpenseFormProps = {
   onCancel: () => void
+  selectedExpense?: Expense
+  onSubmit: (expense: Omit<Expense, 'id'>) => Promise<void>
+  isSubmitting: boolean
 }
 
 const inputsConfig = {
@@ -29,13 +31,16 @@ const inputsConfig = {
   },
 }
 
-export function ExpenseForm({ onCancel }: Readonly<ExpenseFormProps>) {
+export function ExpenseForm({
+  onCancel,
+  selectedExpense = null,
+  onSubmit,
+  isSubmitting,
+}: Readonly<ExpenseFormProps>) {
   const route = useRoute<RouteProp<RootStackParamList>>()
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] =
     useState<boolean>(true)
   const expenseId = route.params?.expenseId
-  const { state } = useContext(ExpensesContext)
-  const selectedExpense = state.find((item) => item.id === expenseId)
   const isEditScreen = !!expenseId
   const initialValues: ExpenseformInitialValues = selectedExpense && {
     amount: String(selectedExpense.amount),
@@ -55,9 +60,10 @@ export function ExpenseForm({ onCancel }: Readonly<ExpenseFormProps>) {
     if (!isEditScreen || !selectedExpense) return null
 
     if (
-      initialValues.amount !== inputs.amount.value.replace('$', '') ||
-      initialValues.date !== inputs.date.value ||
-      initialValues.description !== inputs.description.value.trim()
+      Number(initialValues?.amount).toFixed(2) !==
+        Number(inputs.amount.value.replace('$', '')).toFixed(2) ||
+      initialValues?.date !== inputs.date.value ||
+      initialValues?.description !== inputs.description.value.trim()
     ) {
       return true
     }
@@ -87,7 +93,15 @@ export function ExpenseForm({ onCancel }: Readonly<ExpenseFormProps>) {
     }
   }, [inputs, initialValues])
 
-  const handleSubmit = () => {}
+  const handleSubmit = async () => {
+    const expense = {
+      amount: Number(inputs.amount.value.replace('$', '').replace(',', '')),
+      date: new Date(inputs.date.value),
+      description: inputs.description.value,
+    }
+
+    await onSubmit(expense)
+  }
 
   return (
     <View>
@@ -145,7 +159,8 @@ export function ExpenseForm({ onCancel }: Readonly<ExpenseFormProps>) {
         <Button
           onPress={handleSubmit}
           rootStyles={styles.button}
-          disabled={isSubmitButtonDisabled}
+          disabled={isSubmitButtonDisabled || isSubmitting}
+          isLoading={isSubmitting}
         >
           {isEditScreen ? 'Update' : 'Add'}
         </Button>

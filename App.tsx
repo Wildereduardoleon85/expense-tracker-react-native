@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { StatusBar } from 'expo-status-bar'
 import { FontAwesome } from 'expo-vector-icons'
 import { FontAwesomeIconName, Screens } from './types'
-import { AllExpenses, ManageExpense, RecentExpenses } from './screens'
+import { Expenses, EditExpense, AddExpense } from './screens'
 import { Header, TabBar, HeaderProps } from './components'
 import ExpensesProvider from './context/ExpenseProvider'
 
@@ -15,7 +15,8 @@ export type RootStackParamList = {
   RecentExpenses: undefined
   AllExpenses: undefined
   ExpensesOverview: undefined
-  ManageExpense: { expenseId: string }
+  AddExpense: undefined
+  EditExpense: { expenseId: string }
 }
 
 type TabBarIconProps = {
@@ -51,7 +52,7 @@ function ExpensesOverview() {
     >
       <BottomTabs.Screen
         name={Screens.RecentExpenses}
-        component={RecentExpenses}
+        component={Expenses}
         options={{
           title: 'Recent Expenses',
           tabBarLabel: 'Recent',
@@ -60,7 +61,7 @@ function ExpensesOverview() {
       />
       <BottomTabs.Screen
         name={Screens.AllExpenses}
-        component={AllExpenses}
+        component={Expenses}
         options={{
           title: 'All Expenses',
           tabBarLabel: 'All Expenses',
@@ -84,11 +85,21 @@ export default function App() {
               component={ExpensesOverview}
             />
             <Stack.Screen
-              name={Screens.ManageExpense}
-              component={ManageExpense}
+              name={Screens.AddExpense}
+              component={AddExpense}
               options={{
                 header,
                 headerBackVisible: true,
+                title: 'Add Expense',
+              }}
+            />
+            <Stack.Screen
+              name={Screens.EditExpense}
+              component={EditExpense}
+              options={{
+                header,
+                headerBackVisible: true,
+                title: 'Edit Expense',
               }}
             />
           </Stack.Navigator>

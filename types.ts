@@ -4,7 +4,8 @@ export enum Screens {
   RecentExpenses = 'RecentExpenses',
   AllExpenses = 'AllExpenses',
   ExpensesOverview = 'ExpensesOverview',
-  ManageExpense = 'ManageExpense',
+  EditExpense = 'EditExpense',
+  AddExpense = 'AddExpense',
 }
 
 export type FontAwesomeIconName = keyof typeof FontAwesome.glyphMap
@@ -16,7 +17,9 @@ export type Expense = {
   date: Date
 }
 
-export type ExpensesState = Expense[]
+export type ExpensesState = {
+  refreshExpenses: boolean
+}
 
 export type InputNames = 'amount' | 'date' | 'description'
 
@@ -33,3 +36,15 @@ export type InputValues = {
 export type ExpenseformInitialValues = {
   [key in InputNames]: string
 }
+
+export type ApiResponse<T = undefined> = T extends undefined
+  ? {
+      error: string
+      ok: boolean
+      data?: T
+    }
+  : {
+      error: string
+      ok: boolean
+      data: T
+    }
